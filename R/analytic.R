@@ -122,6 +122,9 @@ search_param <-
     } else {
       # Add ems_id in the data
       for (i in 1:length(prm)) prm[[i]]$ems_id <- anal$ems_id
+      # Collapse the list of lists into a single list
+      # to reduce the `Path` and `DisplayPath` elements
+      prm <- lapply(prm, \(x) lapply(x, \(x) paste(unlist(x), collapse = " ")))
       # If the param set has more than one param, order than by length
       # of their names
       word_len <- sapply(prm, function(x) nchar(x$name))
